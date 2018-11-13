@@ -5,5 +5,13 @@ package com.stylefeng.guns.api.user;
  */
 public interface UserAPI {
 
-    public boolean userLogin(String username, String password);
+    int userLogin(String username, String password);
+
+    boolean register(UserModel userModel);
+
+    boolean checkUsername(String username);
+
+    UserInfoModel getUserInfo(String uuid);
+
+    UserInfoModel updateUserInfo(UserInfoModel userInfoModel);
 }
