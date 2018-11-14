@@ -10,13 +10,22 @@ import com.stylefeng.guns.api.user.UserInfoModel;
  **/
 public class CurrentUser {
 
-    public static final ThreadLocal<UserInfoModel> threadLocal = new ThreadLocal<>();
+    public static final ThreadLocal<String> threadLocal = new ThreadLocal<>();
 
-    public static void saveUserInfo(UserInfoModel userInfoModel){
-        threadLocal.set(userInfoModel);
+    //使用userId降低存储压力
+//    public static void saveUserInfo(UserInfoModel userInfoModel){
+//        threadLocal.set(userInfoModel);
+//    }
+//
+//    public static UserInfoModel getCurrentUser(){
+//        return threadLocal.get();
+//    }
+    public static void saveUserId(String userId){
+        threadLocal.set(userId);
     }
 
-    public static UserInfoModel getCurrentUser(){
+    public static String getUserId(){
         return threadLocal.get();
     }
+
 }

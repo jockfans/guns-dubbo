@@ -64,6 +64,11 @@
             <groupId>com.stylefeng</groupId>
             <artifactId>guns-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.stylefeng.guns</groupId>
+            <artifactId>guns-gateway</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 
     <build>
