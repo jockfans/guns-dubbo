@@ -13,6 +13,9 @@ import com.stylefeng.guns.rest.common.persistence.model.MoocUserT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @author
  * @create 2018-11-08 上午10:23
@@ -72,13 +75,58 @@ public class UserServiceImpl implements UserAPI{
         }
     }
 
+    //创建公用方法用于从数据库模型转换至业务模型
+    private UserInfoModel do2UserInfo(MoocUserT moocUserT){
+        UserInfoModel userInfoModel = new UserInfoModel();
+
+
+        userInfoModel.setUuid(""+moocUserT.getUuid());
+        userInfoModel.setUsername(moocUserT.getUserName());
+        userInfoModel.setUpdateTime(""+moocUserT.getUpdateTime().getTime());
+        userInfoModel.setSex(""+moocUserT.getUserSex());
+        userInfoModel.setPhone(moocUserT.getUserPhone());
+        userInfoModel.setNickname(moocUserT.getNickName());
+        userInfoModel.setLifeState(""+moocUserT.getLifeState());
+        userInfoModel.setHeadAddress(moocUserT.getHeadUrl());
+        userInfoModel.setEmail(moocUserT.getEmail());
+        userInfoModel.setCreateTime(""+moocUserT.getBeginTime().getTime());
+        userInfoModel.setBirthday(moocUserT.getBirthday());
+        userInfoModel.setBiography(moocUserT.getBiography());
+        userInfoModel.setAddress(moocUserT.getAddress());
+
+        return userInfoModel;
+    }
+
     @Override
     public UserInfoModel getUserInfo(String uuid) {
-        return null;
+        MoocUserT moocUserT = moocUserTMapper.selectById(uuid);
+        UserInfoModel userInfoModel = do2UserInfo(moocUserT);
+        return userInfoModel;
     }
 
     @Override
     public UserInfoModel updateUserInfo(UserInfoModel userInfoModel) {
-        return null;
+        MoocUserT moocUserT = new MoocUserT();
+        moocUserT.setUuid(Integer.parseInt(userInfoModel.getUuid()));
+        moocUserT.setUserSex(Integer.parseInt(userInfoModel.getSex()));
+        moocUserT.setUpdateTime(new Date(System.currentTimeMillis()));
+        moocUserT.setNickName(userInfoModel.getNickname());
+        moocUserT.setUserPhone(userInfoModel.getPhone());
+        moocUserT.setLifeState(Integer.parseInt(userInfoModel.getLifeState()));
+        moocUserT.setHeadUrl(userInfoModel.getHeadAddress());
+        moocUserT.setEmail(userInfoModel.getEmail());
+        moocUserT.setBirthday(userInfoModel.getBirthday());
+        moocUserT.setBiography(userInfoModel.getBiography());
+        moocUserT.setBeginTime(new Date(userInfoModel.getCreateTime()));
+        moocUserT.setUserPhone(userInfoModel.getPhone());
+
+        Integer result = moocUserTMapper.updateById(moocUserT);
+        if(result > 0){
+            UserInfoModel userInfo = getUserInfo(""+moocUserT.getUuid());
+            return userInfo;
+        }else{
+            return userInfoModel;
+        }
+
     }
 }

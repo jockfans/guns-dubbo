@@ -18,6 +18,7 @@ public class ResponseVO<M> {
     //私有构造,不允许在外部创建实体
     private ResponseVO(){}
 
+    //成功
     public static <M> ResponseVO success(M m){
         ResponseVO responseVO = new ResponseVO();
         responseVO.setStatus(0);
@@ -25,6 +26,14 @@ public class ResponseVO<M> {
         return responseVO;
     }
 
+    public static <M> ResponseVO success(String msg){
+        ResponseVO responseVO = new ResponseVO();
+        responseVO.setStatus(0);
+        responseVO.setMsg(msg);
+        return responseVO;
+    }
+
+    //业务失败
     public static ResponseVO serviceFail(String msg){
         ResponseVO responseVO = new ResponseVO();
         responseVO.setStatus(1);
@@ -32,6 +41,7 @@ public class ResponseVO<M> {
         return responseVO;
     }
 
+    //系统异常
     public static ResponseVO appFail(String msg){
         ResponseVO responseVO = new ResponseVO();
         responseVO.setStatus(999);
