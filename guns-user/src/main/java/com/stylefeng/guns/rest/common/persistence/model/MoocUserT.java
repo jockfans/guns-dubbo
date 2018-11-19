@@ -14,7 +14,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author stylefeng
- * @since 2018-11-14
+ * @since 2018-11-19
  */
 @TableName("mooc_user_t")
 public class MoocUserT extends Model<MoocUserT> {
