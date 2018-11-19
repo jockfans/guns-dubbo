@@ -22,7 +22,7 @@ public class UserController {
     @Reference(interfaceClass = UserAPI.class)
     private UserAPI userAPI;
 
-    @RequestMapping(name = "register", method = RequestMethod.POST)
+    @RequestMapping(value = "register", method = RequestMethod.POST)
     public ResponseVO register(UserModel userModel){
         //校验提交的用户名和密码
         if(userModel.getUsername() == null || userModel.getUsername().trim().length() == 0){
@@ -42,7 +42,7 @@ public class UserController {
         }
     }
 
-    @RequestMapping(name = "check", method = RequestMethod.POST)
+    @RequestMapping(value = "check", method = RequestMethod.POST)
     public ResponseVO check(String username){
         if(username != null && username.trim().length()>0){
             if(userAPI.checkUsername(username)){
