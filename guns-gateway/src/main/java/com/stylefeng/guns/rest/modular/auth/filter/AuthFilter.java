@@ -45,7 +45,7 @@ public class AuthFilter extends OncePerRequestFilter {
         //忽略配置文件中ignore-url配置的路径,不需要jwt验证
         String ignoreUrlStr = jwtProperties.getIgnoreUrl();
         String[] ingoreUrl = ignoreUrlStr.split(",");
-        System.out.print(request.getServletPath());
+
         for(int x = 0; x < ingoreUrl.length; x++){
             if(request.getServletPath().equals(ingoreUrl[x])){
                 chain.doFilter(request, response);

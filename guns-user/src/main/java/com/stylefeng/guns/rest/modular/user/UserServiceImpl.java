@@ -117,8 +117,8 @@ public class UserServiceImpl implements UserAPI{
         moocUserT.setEmail(userInfoModel.getEmail());
         moocUserT.setBirthday(userInfoModel.getBirthday());
         moocUserT.setBiography(userInfoModel.getBiography());
-        moocUserT.setBeginTime(new Date(userInfoModel.getCreateTime()));
-        moocUserT.setUserPhone(userInfoModel.getPhone());
+        moocUserT.setAddress(userInfoModel.getAddress());
+        //moocUserT.setBeginTime(new Date(userInfoModel.getCreateTime()));
 
         Integer result = moocUserTMapper.updateById(moocUserT);
         if(result > 0){

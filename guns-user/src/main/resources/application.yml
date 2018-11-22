@@ -28,7 +28,7 @@ mybatis-plus:
 
 spring:
   application:
-    name: meeting-gateway
+    name: meeting-user
   dubbo:
     server: true
     registry: zookeeper://192.168.216.128:2181
