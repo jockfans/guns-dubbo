@@ -2,8 +2,6 @@ package com.stylefeng.guns.rest.common;/**
  * Created by misdeadgirl on 2018/11/13.
  */
 
-import com.stylefeng.guns.api.user.UserInfoModel;
-
 /**
  * @author
  * @create 2018-11-13 下午3:16

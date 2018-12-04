@@ -1,4 +1,4 @@
-package com.stylefeng.guns.api.user;/**
+package com.stylefeng.guns.api.user.vo;/**
  * Created by misdeadgirl on 2018/11/12.
  */
 
