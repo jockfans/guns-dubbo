@@ -77,7 +77,7 @@ public class FilmServiceImpl implements FilmAPI {
 
         //通过EntityWraper筛选热映条件
         EntityWrapper<MoocFilmT> entityWrapper = new EntityWrapper<>();
-        entityWrapper.eq("film_status","1");//film_status字段的值1为热映电影
+        entityWrapper.eq("film_status","1");//film_status字段的值1为正在上映电影
         if(islimit){
             Page<MoocFilmT> page = new Page<>(1,num);//当前页,查询条数
             List<MoocFilmT> moocFilmTs = moocFilmTMapper.selectPage(page,entityWrapper);
@@ -115,16 +115,47 @@ public class FilmServiceImpl implements FilmAPI {
 
     @Override
     public List<FilmInfoVO> getBoxRanking() {
-        return null;
+        List<FilmInfoVO> boxRankingFilmInfos = new ArrayList<>();
+        //获取票房排行前十的电影,取正在上映的
+        EntityWrapper<MoocFilmT> boxRankingEntityWrapper = new EntityWrapper<>();
+        boxRankingEntityWrapper.eq("film_status","1");
+
+        //用Page取出前十的条件
+        Page<MoocFilmT> page = new Page<>(1,10,"film_box_office");
+
+        List<MoocFilmT> boxRankingFilms = moocFilmTMapper.selectPage(page,boxRankingEntityWrapper);
+        boxRankingFilmInfos = getFilmInfos(boxRankingFilms);
+        return boxRankingFilmInfos;
     }
 
     @Override
     public List<FilmInfoVO> getExceptRanking() {
-        return null;
+        List<FilmInfoVO> exceptRankingFilmInfoVOs = new ArrayList<>();
+        //获取预售票房
+        EntityWrapper<MoocFilmT> exceptRankingEntityWrapper = new EntityWrapper<>();
+        exceptRankingEntityWrapper.eq("film_status","2");
+
+        //用Page取出前十
+        Page<MoocFilmT> page = new Page<>(1,10,"film_preSaleNum");
+
+        List<MoocFilmT> exceptRankingFilms = moocFilmTMapper.selectPage(page,exceptRankingEntityWrapper);
+        exceptRankingFilmInfoVOs = getFilmInfos(exceptRankingFilms);
+
+        return exceptRankingFilmInfoVOs;
     }
 
     @Override
     public List<FilmInfoVO> getTop() {
-        return null;
+        //取正在上映的评分前十
+        List<FilmInfoVO> topFilmVOs = new ArrayList<>();
+
+        EntityWrapper<MoocFilmT> topFilmEntityWrapper = new EntityWrapper<>();
+        topFilmEntityWrapper.eq("film_status","1");
+
+        Page<MoocFilmT> page = new Page<>(1,10,"film_score");
+
+        List<MoocFilmT> topFilms = moocFilmTMapper.selectPage(page, topFilmEntityWrapper);
+        topFilmVOs = getFilmInfos(topFilms);
+        return topFilmVOs;
     }
 }

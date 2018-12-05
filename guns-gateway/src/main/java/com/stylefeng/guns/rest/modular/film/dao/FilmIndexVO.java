@@ -5,6 +5,7 @@ package com.stylefeng.guns.rest.modular.film.dao;/**
 import com.stylefeng.guns.api.film.vo.BannersVO;
 import com.stylefeng.guns.api.film.vo.FilmInfoVO;
 import com.stylefeng.guns.api.film.vo.FilmVO;
+import lombok.Data;
 
 import java.util.List;
 
@@ -12,9 +13,10 @@ import java.util.List;
  * @author
  * @create 2018-11-28 上午8:27
  **/
+@Data
 public class FilmIndexVO {
 
-    private BannersVO banners;
+    private List<BannersVO> banners;
     private FilmVO hotFilms;
     private FilmVO soonFilms;
     private List<FilmInfoVO> boxRanking;
